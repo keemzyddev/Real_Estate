@@ -7,7 +7,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Property.belongsTo(models.Property_Owner, {
+        foreignKey: "P_OwnerId",
+        onDelete: "CASCADE"
+      });
     }
   }
   Property.init(
@@ -41,11 +44,32 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         AllowNull: false,
       },
+      state: {
+        type: DataTypes.STRING,
+        AllowNull: false,
+      },
+      lga: {
+        type: DataTypes.STRING,
+        AllowNull: false,
+      },
+      town: {
+        type: DataTypes.STRING,
+        AllowNull: false,
+      },
       street: {
         type: DataTypes.STRING,
         AllowNull: false,
       },
+      P_OwnerId: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        onDelete: "CASCADE",
+        references: {
+          model: "Property_Owners",
+          key: "id",
+        },
     },
+  },
     {
       sequelize,
       modelName: "Property",

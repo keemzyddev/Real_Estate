@@ -1,3 +1,5 @@
+const { property_Owner } = require("../models");
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -31,9 +33,30 @@ module.exports = {
         type: Sequelize.STRING,
         AllowNull: false,
       },
+      state: {
+        type: Sequelize.STRING,
+        AllowNull: false,
+      },
+      lga: {
+        type: Sequelize.STRING,
+        AllowNull: false,
+      },
+      town: {
+        type: Sequelize.STRING,
+        AllowNull: false,
+      },
       street: {
         type: Sequelize.STRING,
         AllowNull: false,
+      },
+      P_OwnerId: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        onDelete: "CASCADE",
+        references: {
+          model: "Property_Owners",
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,

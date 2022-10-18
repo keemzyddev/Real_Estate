@@ -30,6 +30,6 @@ const upload = multer({
       req.fileError = "File Format is not valid";
     }
   },
-}).single("photo");
+});
 
 module.exports = upload

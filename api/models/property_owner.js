@@ -8,6 +8,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Property_Owner.hasMany(models.Property, {
+        foreignKey: "P_OwnerId",
+      });
     }
   }
   Property_Owner.init(
@@ -29,16 +32,20 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         AllowNull: false,
       },
-      Phone: {
-        type: DataTypes.INTEGER,
+      password: {
+        type: DataTypes.STRING,
         AllowNull: false,
       },
-      Dob: {
+      phone: {
+        type: DataTypes.STRING,
+        AllowNull: false,
+      },
+      dob: {
         type: DataTypes.DATE,
         AllowNull: false,
       },
       profileImage: {
-        type: DataTypes.DATE,
+        type: DataTypes.BLOB("long"),
         AllowNull: false,
       },
     },

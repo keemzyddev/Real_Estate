@@ -19,16 +19,20 @@ module.exports = {
         type: Sequelize.STRING,
         AllowNull: false,
       },
-      Phone: {
-        type: Sequelize.INTEGER,
+      password: {
+        type: Sequelize.STRING,
         AllowNull: false,
       },
-      Dob: {
+      phone: {
+        type: Sequelize.STRING,
+        AllowNull: false,
+      },
+      dob: {
         type: Sequelize.DATE,
         AllowNull: false,
       },
       profileImage: {
-        type: Sequelize.DATE,
+        type: Sequelize.Sequelize.BLOB("long"),
         AllowNull: false,
       },
       createdAt: {
