@@ -3,7 +3,13 @@ const models = require("../models");
 //get property
 const getProperty = async (req, res) => {
   try {
-    const property = await models.Property.findAll();
+    const property = await models.Property.findAll({
+        include: [
+            {
+              model: models.property_Owner,
+            },
+          ],
+    });
     res.status(200).json(property);
   } catch (err) {
     res.status(500).json(err);

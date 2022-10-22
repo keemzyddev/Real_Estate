@@ -1,18 +1,20 @@
 const models = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const property = require("../models/property");
 
 //get User
 const getUser = async (req, res) => {
   try {
     const user = await models.Property_Owner.findAll({
-      include: [
-        {
-          model: models.Property,
-        },
-      ],
+      where: {
+        email: "ghost@gmail.com",
+      },
     });
-    res.status(200).json(user);
+    const property = await user.getProperties();
+
+      res.status(200).json(user, property.propertyName);
+
   } catch (err) {
     res.status(500).json(err);
   }
@@ -27,6 +29,7 @@ const addUser = async (req, res) => {
       where: {
         email: `${email}`,
       },
+      plain: true,
     });
 
     if (emailExist) {
